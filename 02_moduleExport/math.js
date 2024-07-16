@@ -21,3 +21,8 @@
 // exports.division = (a, b) => a / b;
 
 
+
+
+const info = require("./Fruits")
+
+console.log(info[1].name)
