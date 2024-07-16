@@ -21,6 +21,9 @@
 // exports.division = (a, b) => a / b;
 
 
+exports.abc = 10;
+
+
 
 
 const info = require("./Fruits")
