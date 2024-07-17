@@ -12,9 +12,9 @@
 
 ### commands
 
-- npm init => create pakage.json file
-- npm install => node_modules
-- npm install _<pakage name>_ => for install pakages
+- `npm init` => create pakage.json file
+- `npm install` => node_modules
+- `npm install <pakage name>` => for install pakages
 
 
 ## import/export
