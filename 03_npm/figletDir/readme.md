@@ -19,6 +19,6 @@
 
 ## import/export
 
-- **import/export** is the modern way to write javascript code to export and import code in files and folders instead of *require and module.exports*. **ECMAscript 6 (European Computer Manufactures Association)** the *international Standard for Scripting Languages*. They standarized the module javascipt and initiate new more features like arrow functions and many more improvements. **import/export** supports the asychronous loading means the code which is time taken and it is not blocked the other code execution or compilation.
-- For using *import/export* which is module javascript we must use the .**mjs** file extension or add **"type": "module"** in pakage.json file.
+- **import/export** is the modern way to write javascript code to export and import code in files and folders instead of **require and module.exports**. **ECMAscript 6 (European Computer Manufactures Association)** the *international Standard for Scripting Languages*. They standarized the module javascipt and initiate new more features like arrow functions and many more improvements. **import/export** supports the asychronous loading means the code which is time taken and it is not blocked the other code execution or compilation.
+- For using **import/export** which is module javascript we must use the .**mjs** file extension or add **"type": "module"** in pakage.json file.
 - For common js it is by default. if use manually we use the **.cjs** file extesion or add **"type": "commonjs"** in pakage.json file.
