@@ -7,6 +7,7 @@
   },
   "author": "Hamza aamir",
   "license": "ISC",
+  "type": "commonjs",
   "description": "",
   "dependencies": {
     "figlet": "^1.7.0"
