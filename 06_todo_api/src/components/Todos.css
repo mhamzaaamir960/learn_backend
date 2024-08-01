@@ -1,0 +1,61 @@
+.container {
+  width: auto;
+  height: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 10px;
+  margin: 10px;
+  /* border: solid black; */
+  gap: 50px;
+}
+
+.cards {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.card {
+    width: 300px;
+    height: auto;
+    border: solid gray 2px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 5px;
+    border-radius: 10px;
+}
+
+.heading {
+    font-size: 30px;
+    font-weight: bold;
+    color: firebrick;
+}
+
+.description {
+    font-size: 20px;
+    color: darkslategrey;
+}
+
+
+.btn {
+    color: white;
+    background-color: black;
+    font-size: 20px;
+    cursor: pointer;
+    padding: 2px 5px;
+    border-radius: 10px;
+    text-decoration: none;
+}
+
+
+input {
+    width: 200px;
+    border-radius: 10px;
+    padding: 10px;
+    font-size: large;
+}

@@ -8,7 +8,7 @@ btnn.addEventListener("click", async () => {
   let joke = await getJoke();
   $joke.innerHTML = `Joke: ${joke.fact}`;
   ln.innerHTML = `Length: ${joke.length}`;
-//   console.log(joke)
+  console.log(joke);
 });
 
 let url = "https://catfact.ninja/fact";
@@ -25,6 +25,6 @@ async function getJoke() {
     console.log(
       `Error: ${error.response.status}! ${error.response.data.message}`
     );
-    return `Error: ${error.response.status}! ${error.response.data}`;
+    return error;
   }
 }
