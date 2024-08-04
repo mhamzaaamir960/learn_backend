@@ -1,15 +1,17 @@
 {
-  "name": "05_express",
+  "name": "express_learn",
   "version": "1.0.0",
   "description": "* Express is a nodejs framework and server programming language to handle requests and response it.",
   "main": "backend.js",
+  "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
-  "author": "",
+  "author": "Muhammad Hamza Aamir",
   "license": "ISC",
   "dependencies": {
     "express": "^4.19.2"
-  }
+  },
+  "devDependencies": {}
 }

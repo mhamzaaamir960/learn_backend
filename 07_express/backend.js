@@ -1,11 +1,11 @@
-const express = require("express");
-const app = express();
+// const express = require("express");
+// const app = express();
 
-const port = 3000;
+// const port = 3000;
 
-app.listen(port, (req, res) => {
-  console.log("app is listening on port ", port);
-});
+// app.listen(port, () => {
+//   console.log("app is listening on port ", port);
+// });
 
 // app.use((req, res) => {
 //   console.log("request recieved");
@@ -49,9 +49,9 @@ app.listen(port, (req, res) => {
 //   res.send(ress);
 // });
 
-app.get("/search", (req, res) => {
-  let { q , name} = req.query;
-  if (!q) res.send("nothing searched");
-  console.log(q);
-  res.send(`Query for ${q} to ${name}`);
-});
+// app.get("/search", (req, res) => {
+//   let { q , name} = req.query;
+//   if (!q) res.send("nothing searched");
+//   console.log(q);
+//   res.send(`Query for ${q} to ${name}`);
+// });
