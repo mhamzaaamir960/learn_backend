@@ -1,10 +1,26 @@
-import mongoose from 'mongoose'
+import mongoose from "mongoose";
 
-
-const patientSchema = new mongoose.Schema({
+const patientSchema = new mongoose.Schema(
+  {
     name: {
-        type: String,
-        required: true,
+      type: String,
+      required: true,
     },
-    
-},{timestamps: true})
+    age: {
+      type: Number,
+      required: true,
+    },
+    gender: {
+      type: String,
+      enum: ["MALE", "FEMALE"],
+      required: true,
+    },
+    hospital: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Hospital",
+    },
+  },
+  { timestamps: true }
+);
+
+export const Patient = mongoose.model("Patient", patientSchema);
