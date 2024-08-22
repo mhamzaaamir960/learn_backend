@@ -1,17 +1,17 @@
-###### HTTP -> Hyper Text Transfer Protocol
+#### HTTP -> Hyper Text Transfer Protocol
 
 - HTTP headers -> metadata -> key-value: sent along with request & response
 - HTTP headers use for caching, authentication etc
 - e.g: bearer token, session cookies etc
 
-###### Types of headers
+#### Types of headers
 
 - Request Headers -> from client
 - Response Headers -> from server
 - Representation Headers -> encoding/compression
 - Payload Headers -> data
 
-###### Most common headers:
+#### Most common headers:
 
 - Accept : application/json
 - User-Agent: check the request comes from postman, browser etc
@@ -20,7 +20,7 @@
 - Cookie
 - Cache-Control
 
-###### HTTP Status Codes
+#### HTTP Status Codes
 
 - 1 - 199 -> Informational
 - 200 - 299 -> Success
