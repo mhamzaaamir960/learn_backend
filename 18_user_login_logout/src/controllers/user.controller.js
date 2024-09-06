@@ -23,6 +23,7 @@ export const userRegister = asyncHandler(async (req, res) => {
     throw new ApiError(400, "All fields are required!");
   }
 
+  // to check the user if already exists or not using username and email in db
   const existedUser = await User.findOne({
     $or: [{ username }, { email }],
   });
@@ -30,12 +31,17 @@ export const userRegister = asyncHandler(async (req, res) => {
   if (existedUser) {
     throw new ApiError(409, "User with email or username already exists.");
   }
+  
 
+  // path of the avatar
   const avatarLocalPath = req.files?.avatar[0]?.path;
+  console.log(avatarLocalPath)
   if (!avatarLocalPath) {
     throw new ApiError(400, "Avatar is required.");
   }
-  const coverImageLocalPath = req.files?.coverImage[0]?.path;
+
+   // cover image path
+  let coverImageLocalPath;
   if (
     req.files &&
     Array.isArray(req.files.coverImage) &&
@@ -44,12 +50,18 @@ export const userRegister = asyncHandler(async (req, res) => {
     coverImageLocalPath = req.files.coverImage[0].path;
   }
 
+
+  // avatar uploaded on cloudinary
   const avatar = await uploadOnCloudinary(avatarLocalPath);
   if (!avatar) {
     throw new ApiError(400, "Avatar is required.");
   }
-  const coverImage = await uploadOnCloudinary(coverImageLocalPath);
 
+  // coverImage uploaded on cloudinary
+  const coverImage = await uploadOnCloudinary(coverImageLocalPath);
+  
+
+  // user field created in db
   const user = await User.create({
     username: username.toLowerCase(),
     fullName,
@@ -59,6 +71,8 @@ export const userRegister = asyncHandler(async (req, res) => {
     coverImage: coverImage.url || "",
   });
 
+
+  // when data get password and refresh token is ignored
   const createdUser = await User.findById(user._id).select(
     "-password -refreshToken",
   );
@@ -72,3 +86,7 @@ export const userRegister = asyncHandler(async (req, res) => {
     .status(201)
     .json(new ApiResponse(200, createdUser, "User registered successfully!"));
 });
+
+const userLongin = asyncHandler(async (req,res) => {
+  
+})
