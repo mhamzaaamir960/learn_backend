@@ -1,0 +1,105 @@
+{
+  "ahmed": {
+    "username": "ahmed",
+    "followers": 1200,
+    "following": 350,
+    "posts": [
+      {
+        "likes": 230,
+        "comments": 15,
+        "image": "https://dummyimage.com/600x400/000/fff&text=Post1"
+      },
+      {
+        "likes": 180,
+        "comments": 12,
+        "image": "https://dummyimage.com/600x400/111/fff&text=Post2"
+      }
+    ]
+  },
+
+  "ali": {
+    "username": "ali",
+    "followers": 3400,
+    "following": 500,
+    "posts": [
+      {
+        "likes": 450,
+        "comments": 25,
+        "image": "https://dummyimage.com/600x400/222/fff&text=Post1"
+      },
+      {
+        "likes": 390,
+        "comments": 20,
+        "image": "https://dummyimage.com/600x400/333/fff&text=Post2"
+      }
+    ]
+  },
+  "omer": {
+    "username": "omar",
+    "followers": 800,
+    "following": 290,
+    "posts": [
+      {
+        "likes": 150,
+        "comments": 10,
+        "image": "https://dummyimage.com/600x400/444/fff&text=Post1"
+      },
+      {
+        "likes": 200,
+        "comments": 18,
+        "image": "https://dummyimage.com/600x400/555/fff&text=Post2"
+      }
+    ]
+  },
+  "zaid": {
+    "username": "zaid",
+    "followers": 2300,
+    "following": 600,
+    "posts": [
+      {
+        "likes": 350,
+        "comments": 30,
+        "image": "https://dummyimage.com/600x400/666/fff&text=Post1"
+      },
+      {
+        "likes": 410,
+        "comments": 35,
+        "image": "https://dummyimage.com/600x400/777/fff&text=Post2"
+      }
+    ]
+  },
+  "bilal": {
+    "username": "bilal",
+    "followers": 1200,
+    "following": 180,
+    "posts": [
+      {
+        "likes": 240,
+        "comments": 12,
+        "image": "https://dummyimage.com/600x400/888/fff&text=Post1"
+      },
+      {
+        "likes": 270,
+        "comments": 15,
+        "image": "https://dummyimage.com/600x400/999/fff&text=Post2"
+      }
+    ]
+  },
+  "yusuf": {
+    "username": "yusuf",
+    "followers": 5600,
+    "following": 700,
+    "posts": [
+      {
+        "likes": 600,
+        "comments": 50,
+        "image": "https://dummyimage.com/600x400/aaa/fff&text=Post1"
+      },
+      {
+        "likes": 750,
+        "comments": 55,
+        "image": "https://dummyimage.com/600x400/bbb/fff&text=Post2"
+      }
+    ]
+  }
+}
