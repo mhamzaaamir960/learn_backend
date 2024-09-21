@@ -133,7 +133,7 @@ const userLogIn = asyncHandler(async (req, res) => {
     throw new ApiError(404, "User not exist!");
   }
 
-  const isPasswordValid = user.isPasswordCorrect(password);
+  const isPasswordValid = await user.isPasswordCorrect(password);
   if (!isPasswordValid) {
     throw new ApiError(401, "Invalid Password!");
   }
@@ -334,7 +334,7 @@ const updateUserCoverImage = asyncHandler(async (req, res) => {
   const coverImageLocalPath = req.file?.path;
 
   if (!coverImageLocalPath) {
-    return;
+    throw new ApiError("cover image is not added")
   }
 
   const coverImage = await uploadOnCloudinary(coverImageLocalPath);
