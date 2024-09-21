@@ -91,7 +91,7 @@ const userRegister = asyncHandler(async (req, res) => {
     coverImage: coverImage.url || "",
   });
 
-  // when data get password and refresh token is ignored
+  // when data is retrived from db password and refresh token is ignoresd
   const createdUser = await User.findById(user._id).select(
     "-password -refreshToken",
   );
@@ -126,7 +126,7 @@ const userLogIn = asyncHandler(async (req, res) => {
     $or: [{ username }, { email }],
   });
 
-  console.log(user);
+  // console.log(user);
 
   if (!user) {
     throw new ApiError(404, "User not exist!");
@@ -169,14 +169,17 @@ const userLogIn = asyncHandler(async (req, res) => {
 
 // logout controller
 const userLogOut = asyncHandler(async (req, res) => {
-  await User.findByIdAndUpdate(req.user._id, {
-    $set: {
-      refreshToken: undefined,
+  await User.findByIdAndUpdate(
+    req.user._id,
+    {
+      $set: {
+        refreshToken: undefined,
+      },
     },
-  }),
     {
       new: true,
-    };
+    },
+  );
 
   const options = {
     httpOnly: true,
@@ -206,6 +209,8 @@ const refreshAccessToken = asyncHandler(async (req, res) => {
       process.env.REFRESH_TOKEN_SECRET,
     );
 
+    console.log(decodedToken);
+
     const user = await User.findById(decodedToken?._id);
 
     if (!user) {
@@ -220,9 +225,9 @@ const refreshAccessToken = asyncHandler(async (req, res) => {
       httpOnly: true,
       secure: true,
     };
-    const { accessToken, refreshToken } = await generateAccessAndRefreshTokens(
-      user._id,
-    );
+
+    const { accessToken, newRefreshToken } =
+      await generateAccessAndRefreshTokens(user._id);
 
     return res
       .status(200)
@@ -245,7 +250,7 @@ const refreshAccessToken = asyncHandler(async (req, res) => {
 const changePassword = asyncHandler(async (req, res) => {
   const { oldPassword, newPassword, confirmPassword } = req.body;
 
-  if (!(newPassword || confirmPassword)) {
+  if (newPassword !== confirmPassword) {
     throw new ApiError(401, "New and cofirm password does not match!");
   }
 
@@ -274,7 +279,7 @@ const getCurrentUser = asyncHandler(async (req, res) => {
 // update full name and email controller
 const updateAccountDetails = asyncHandler(async (req, res) => {
   const { fullName, email } = req.body;
-  if (!fullName || !email) {
+  if (!(fullName && email)) {
     throw new ApiError(400, "All fields are required");
   }
 
@@ -292,7 +297,6 @@ const updateAccountDetails = asyncHandler(async (req, res) => {
     .status(200)
     .json(new ApiResponse(200, user, "Account details updated successfully!"));
 });
-
 
 // update avatar controller
 const udpateUserAvatar = asyncHandler(async (req, res) => {
@@ -329,7 +333,7 @@ const updateUserCoverImage = asyncHandler(async (req, res) => {
   const coverImageLocalPath = req.file?.path;
 
   if (!coverImageLocalPath) {
-    throw new ApiError(400, "cover image is required!");
+    return;
   }
 
   const coverImage = await uploadOnCloudinary(coverImageLocalPath);
@@ -354,6 +358,79 @@ const updateUserCoverImage = asyncHandler(async (req, res) => {
     .json(new ApiResponse(200, user, "cover image updated successfully!"));
 });
 
+// get user channel profile controller
+const getUserProfile = asyncHandler(async (req, res) => {
+  const { username } = req.body;
+
+  if (!username?.trim()) {
+    throw new ApiError(400, "Username is missing");
+  }
+
+  // aggregation pipelines
+  const channel = await User.aggregate([
+    {
+      $match: {
+        username: username?.toLowerCase(),
+      },
+    },
+    {
+      $lookup: {
+        from: "subscriptions",
+        localField: "_id",
+        foreignField: "channel",
+        as: "subscribers",
+      },
+    },
+    {
+      $lookup: {
+        from: "subscriptions",
+        localField: "_id",
+        foreignField: "subscriber",
+        as: "subscribedTo",
+      },
+    },
+    {
+      $addFields: {
+        subscribersCount: {
+          $size: "$subscribers",
+        },
+        subscribedToWhom: {
+          $size: "$subscribedTo",
+        },
+        isSubscribed: {
+          $cond: {
+            if: { $in: [req.user?._id, "$subscribers.subscriber"] },
+            then: true,
+            else: false,
+          },
+        },
+      },
+    },
+    {
+      $project: {
+        fullName: 1,
+        username: 1,
+        subscribersCount: 1,
+        subscribedToWhom: 1,
+        isSubscribed: 1,
+        avatar: 1,
+        coverImage: 1,
+        email: 1,
+      },
+    },
+  ]);
+
+  if (!channel?.length) {
+    throw new ApiError(404, "Channel does not exist!");
+  }
+
+  // console.log(channel)
+
+  return res
+    .status(200)
+    .json(new ApiResponse(200, channel, "Channel fetched successfully!"));
+});
+
 export {
   userRegister,
   userLogIn,
@@ -364,4 +441,5 @@ export {
   updateAccountDetails,
   udpateUserAvatar,
   updateUserCoverImage,
+  getUserProfile
 };
