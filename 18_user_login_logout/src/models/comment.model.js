@@ -19,6 +19,10 @@ const commentSchema = new Schema(
   { timestamps: true },
 );
 
+commentSchema.methods.content = async (content) => {
+  if (content === this.content) return;
+  return content;
+};
 
 commentSchema.plugin(mongooseAggregatePaginate);
 

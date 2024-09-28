@@ -108,7 +108,6 @@ const userRegister = asyncHandler(async (req, res) => {
 });
 
 // Login in controller
-
 const userLogIn = asyncHandler(async (req, res) => {
   // get username or email from frontend
   // find user in db using username or email
